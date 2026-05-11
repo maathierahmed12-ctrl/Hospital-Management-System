@@ -15,8 +15,8 @@ public class Doctor extends Person {
     private List<String> assignedPatients;
 
 
-    public Doctor(String id, String firstname, String lastname,
-                  LocalDate dateofBrith, String gender,
+    public Doctor(String id, String firstname, LocalDate lastname,
+                  String dateofBrith, String gender,
                   String phoneNumber, String email, String address, String doctorId, String specialization, String qualification,
                   int experienceYears, String departmentId, double consultationFee, List<String> availableSlots, List<String> assignedPatients) {
 
@@ -30,6 +30,10 @@ public class Doctor extends Person {
         this.consultationFee = consultationFee;
         this.availableSlots = availableSlots;
         this.assignedPatients = assignedPatients;
+    }
+
+    public Doctor() {
+        super();
     }
 
     public String getDoctorId() {
@@ -156,7 +160,12 @@ public class Doctor extends Person {
             }
           availableSlots.add(Slot);
         }
+
+    public List<String> isAvailable() {
+
+        return availableSlots;
     }
+}
 
 
 

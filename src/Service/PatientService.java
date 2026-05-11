@@ -10,8 +10,6 @@ public class PatientService {
 
     private ArrayList<Patient> patients = new ArrayList<>();
 
-    private Scanner scanner = new Scanner(System.in);
-
 
     public void addPatient(Patient patient) {
 
