@@ -12,12 +12,12 @@ public class Nurse extends Person {
     private List<String> assignedPatients;
 
 
-    public Nurse(String id, String firstname, String lastname, LocalDate dateofBrith, String gender, String phoneNumber, String email, String address) {
+    public Nurse(String id, String firstname, String lastname, String gender, String phoneNumber, LocalDate dob, String email, String address, int experienceYears, String departmentId, String shift) {
         super(id, firstname, lastname, dateofBrith, gender, phoneNumber, email, address, String nurseId, String departmentId, String shift, String qualification, List < String > assignedPatients);
 
         this.nurseId = nurseId;
-        this.departmentId = departmentId;
-        this.shift = shift;
+        this.departmentId = this.departmentId;
+        this.shift = this.shift;
         this.qualification = qualification;
         this.assignedPatients = assignedPatients;
 
