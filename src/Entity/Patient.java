@@ -14,6 +14,7 @@ public class Patient extends Person {
     private String insuranceId;
     private List<String> medicalRecords;
     private List<String> appointments;
+    private String patientName;
 
     public Patient(String id, String firstname, String lastname,
                    LocalDate dateofBrith, String gender,
@@ -121,7 +122,7 @@ public class Patient extends Person {
 
     public void displayInfo() {
 
-        super.displayIfo(){
+        super.displayIfo() {
 
             System.out.println("patientId :" + patientId);
             System.out.println("bloodGroup :" + bloodGroup);
@@ -148,6 +149,7 @@ public class Patient extends Person {
     public void addAppointment(String appointment) {
 
         if (appointments == null) {
+
             appointments = new ArrayList<>();
         }
 
@@ -157,5 +159,13 @@ public class Patient extends Person {
     public void updateInsurance(String newInsuranceId) {
 
         this.insuranceId = newInsuranceId;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }
