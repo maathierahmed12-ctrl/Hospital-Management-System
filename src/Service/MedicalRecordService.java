@@ -1,6 +1,8 @@
 package Service;
 
 import Entity.MedicalRecord;
+import Interface.Manageable;
+import Utils.InputHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +129,6 @@ public class MedicalRecordService {
     }
 
 
-
     public void displayAllMedicalRecords() {
 
         for (MedicalRecord record : medicalRecords) {
@@ -137,7 +138,7 @@ public class MedicalRecordService {
     }
 
 
-    public List<MedicalRecord>getRecordsByPatientId(String patientId) {
+    public List<MedicalRecord> getRecordsByPatientId(String patientId) {
 
         List<MedicalRecord> patientRecords = new ArrayList<>();
 
@@ -185,5 +186,113 @@ public class MedicalRecordService {
 
             record.displayInfo();
         }
+
     }
+
+    public class Madical implements Manageable {
+
+        @Override
+        public void add(Object entity) {
+
+            System.out.println("added  diagnosis");
+
+
+            System.out.println("added  blood type");
+
+
+            System.out.println("added  next appointment");
+
+
+            System.out.println("added  notes");
+
+
+        }
+
+        @Override
+        public void remove(String id) {
+
+
+            System.out.println("remove  diagnosis");
+
+
+            System.out.println("remove  blood type");
+
+
+            System.out.println("remove  next appointment");
+
+
+            System.out.println("remove  notes");
+
+
+        }
+
+        @Override
+        public void getAll() {
+
+        }
+        public void handleMedicalRecordsMenu() {
+
+            Boolean patientExit = true;
+
+            while (patientExit) {
+
+                System.out.println(MenuMessage.PatientManagementMenu);
+
+                int option = InputHandler.getIntInput(Constants.ENTER_OPTION, 0, 9);
+
+                switch (option) {
+
+                    case 1 -> {
+                        CreateMedicalRecord();
+                    }
+
+                    case 2 -> {
+
+                        ViewAllRecords();
+                    }
+
+                    case 3 -> {
+                        ViewRecordsbyPatient();
+                    }
+
+                    case 4 -> {
+                        ViewRecordsbyDoctor();
+                    }
+
+                    case 5 -> {
+                        UpdateMedicalRecord();                    }
+
+                    case 6 -> {
+
+                        DeleteMedicalRecord();
+
+                        String key = InputHandler.getStringInput("Search keyword: ");
+                        search(key);
+                    }
+
+                    case 7 -> {
+                        GeneratePatientHistoryReport();
+                    }
+
+                    case 8 -> {
+
+                        String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                        remove(patientId);
+                    }
+
+                    case 9 -> {
+
+                        String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                        displayPatientHistory(patientId);
+                    }
+
+                    case 0 -> {
+                        patientExit = false;
+                    }
+                }
+            }
+        }
+    }
+
 }
+

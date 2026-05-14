@@ -14,155 +14,128 @@ public class Doctor extends Person {
     private List<String> availableSlots;
     private List<String> assignedPatients;
 
+    public Doctor(String id, String firstname, String DOB) {
 
-    public Doctor(String id, String firstname, LocalDate lastname,
-                  String dateofBrith, String gender,
-                  String phoneNumber, String email, String address, String doctorId, String specialization, String qualification,
-                  int experienceYears, String departmentId, double consultationFee, List<String> availableSlots, List<String> assignedPatients) {
+        super(id, firstname, null, LocalDate.parse(DOB),
+                null, null, null, null);
 
-        super(id, firstname, lastname, dateofBrith, gender, phoneNumber, email, address);
-
-        this.doctorId = doctorId;
-        this.specialization = specialization;
-        this.qualification = qualification;
-        this.experienceYears = experienceYears;
-        this.departmentId = departmentId;
-        this.consultationFee = consultationFee;
-        this.availableSlots = availableSlots;
-        this.assignedPatients = assignedPatients;
+        this.doctorId = id;
+        this.specialization = null;
+        this.qualification = null;
+        this.experienceYears = 0;
+        this.departmentId = null;
+        this.consultationFee = 0.0;
+        this.availableSlots = new ArrayList<>();
+        this.assignedPatients = new ArrayList<>();
     }
 
-    public Doctor() {
+    public Doctor(int surgeriesPerformed, List<String> surgeryTypes, boolean operationTheatreAccess) {
         super();
     }
 
     public String getDoctorId() {
-
         return doctorId;
-
     }
 
     public void setdoctorId(String doctorId) {
-
         this.doctorId = doctorId;
     }
 
     public String getSpecialization() {
-
         return specialization;
     }
 
     public void setSpecialization(String specialization) {
-
         this.specialization = specialization;
     }
 
     public String getqualification() {
-
         return qualification;
     }
 
     public void setQualification(String qualification) {
-
         this.qualification = qualification;
     }
 
     public int getexperienceYears() {
-
         return experienceYears;
     }
 
     public void setexperienceYears(int experienceYears) {
-
         this.experienceYears = experienceYears;
     }
 
     public String getdepartmentId() {
-
         return departmentId;
     }
 
     public void setdepartmentId(String departmentId) {
-
         this.departmentId = departmentId;
     }
 
     public double getconsultationFee() {
-
         return consultationFee;
     }
 
     public void setConsultationFee(double consultationFee) {
-
         this.consultationFee = consultationFee;
     }
-
     public List<String> getAvailableSlots() {
-
         return availableSlots;
     }
 
     public void setAvailableSlots(List<String> availableSlots) {
-
         this.availableSlots = availableSlots;
     }
 
     public List<String> getassignedPatients() {
-
         return assignedPatients;
     }
 
     public void setassignedPatients(List<String> assignedPatients) {
-
         this.assignedPatients = assignedPatients;
     }
 
     @Override
-
     public void displayInfo() {
 
-        super.displayIfo();
-        System.out.println("doctorId" + doctorId);
-        System.out.println("specialization" + specialization);
-        System.out.println("qualification" + qualification);
-        System.out.println("experienceYears" + experienceYears);
-        System.out.println("departmentId" + departmentId);
-        System.out.println("consultationFee" + consultationFee);
-        System.out.println("availableSlots" + availableSlots);
-        System.out.println("assignedPatients" + assignedPatients);
-
+        super.displayInfo();
+        System.out.println("doctorId: " + doctorId);
+        System.out.println("specialization: " + specialization);
+        System.out.println("qualification: " + qualification);
+        System.out.println("experienceYears: " + experienceYears);
+        System.out.println("departmentId: " + departmentId);
+        System.out.println("consultationFee: " + consultationFee);
+        System.out.println("availableSlots: " + availableSlots);
+        System.out.println("assignedPatients: " + assignedPatients);
     }
 
-    public void assignPatient(String Patient) {
+    public void assignPatient(String patient) {
 
         if (assignedPatients == null) {
-
             assignedPatients = new ArrayList<>();
         }
 
+        assignedPatients.add(patient);
     }
 
-    public void removePatient(String Patient) {
+    public void removePatient(String patient) {
 
-        if (assignedPatients != null){
-
-            assignedPatients.remove(Patient);
+        if (assignedPatients != null) {
+            assignedPatients.remove(patient);
         }
-
     }
 
-    public void updateAvailability(String Slot) {
+    public void updateAvailability(String slot) {
 
         if (availableSlots == null) {
-
             availableSlots = new ArrayList<>();
-
-            }
-          availableSlots.add(Slot);
         }
 
-    public List<String> isAvailable() {
+        availableSlots.add(slot);
+    }
 
+    public List<String> isAvailable() {
         return availableSlots;
     }
 }

@@ -1,16 +1,19 @@
 package Entity;
 
+import Interface.Displayable;
+
 import java.time.LocalDate;
 import java.util.Objects;
+import Entity.Person;
 
 public class Person {
 
     private String id;
     private String firstname;
     private String lastname;
-    private LocalDate dateofBrith;
+    LocalDate dateofBrith;
     private String gender;
-    private String phoneNumber;
+    String phoneNumber;
     private String email;
     private String address;
 
@@ -24,6 +27,9 @@ public class Person {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
+    }
+
+    public Person() {
     }
 
     public String getId() {
@@ -121,16 +127,7 @@ public class Person {
     @Override
     public String toString() {
 
-        return "Person{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstname + '\'' +
-                ", lastName='" + lastname + '\'' +
-                ", dateOfBirth=" + dateofBrith +
-                ", gender='" + gender + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return STR."Person{id='\{id}', firstName='\{firstname}', lastName='\{lastname}', dateOfBirth=\{dateofBrith}, gender='\{gender}', phoneNumber='\{phoneNumber}', email='\{email}', address='\{address}'}";
     }
 
     @Override
@@ -155,6 +152,45 @@ public class Person {
         return Objects.hash(id);
     }
 
+    protected void displayInfo() {
+    }
+
+    public  class person implements Displayable{
+
+        private String id;
+        private String firstname;
+        private String lastname;
+        LocalDate dateofBrith;
+        private String gender;
+        String phoneNumber;
+        private String email;
+        private String address;
+
+
+        public person(String id, String firstname, String lastname, LocalDate DOB, String gender, String phoneNumber, String email, String address) {
+
+            this.id = id;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.dateofBrith = DOB;
+            this.gender = gender;
+            this.phoneNumber = phoneNumber;
+            this.email = email;
+            this.address = address;
+        }
+
+        @Override
+        public void displayInfo() {
+
+        }
+
+        @Override
+        public void displaySummary() {
+
+            System.out.println("id,firstname,lastname,DOB,gender,phoneNumber, email,address");
+
+        }
+    }
 
     }
 

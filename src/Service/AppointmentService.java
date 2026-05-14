@@ -1,11 +1,15 @@
 package Entity;
 
 import Interface.Displayable;
+import Utils.InputHandler;
 
-import java.sql.Date;
+import javax.swing.event.MenuDragMouseEvent;
+import java.awt.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 
-public class Appointment implements Displayable{
+class appointment implements Displayable {
 
     private String appointmentId;
     private String patientId;
@@ -16,7 +20,7 @@ public class Appointment implements Displayable{
     private String reason;
     private String notes;
 
-    public Appointment(String appointmentId, String patientId, LocalDate appointmentDate, String daily, String booked, String clinic, String hospital, String doctor, String history, String upcoming) {
+    public appointment(String appointmentId, String patientId, LocalDate appointmentDate) {
 
         this.appointmentId = appointmentId;
         this.patientId = patientId;
@@ -28,7 +32,7 @@ public class Appointment implements Displayable{
         this.notes = notes;
     }
 
-    public Appointment(String patientId, String doctorId, LocalDate date, String time) {
+    public appointment(String patientId, String doctorId, LocalDate date, String time) {
     }
 
 
@@ -132,46 +136,81 @@ public class Appointment implements Displayable{
 
     public void setAppointmentId(Date date) {
     }
-    public class appintment implements Displayable {
+    public void handleAppointmentMenu() {
 
-        private String appointmentId;
-        private String patientId;
-        private String doctorId;
-        private LocalDate appointmentDate;
-        private String appointmentTime;
-        private String status;
-        private String reason;
-        private String notes;
+        Boolean patientExit = true;
 
-        public appintment(String appointmentId, String patientId, LocalDate appointmentDate) {
+        while (patientExit) {
 
-            this.appointmentId = appointmentId;
-            this.patientId = patientId;
-            this.doctorId = doctorId;
-            this.appointmentDate = appointmentDate;
-            this.appointmentTime = appointmentId;
-            this.status = status;
-            this.reason = reason;
-            this.notes = notes;
-        }
+            System.out.println(MenuMessage.PatientManagementMenu);
 
+            int option = InputHandler.getIntInput(Constants.ENTER_OPTION, 0, 9);
 
-        @Override
-        public void displayInfo() {
+            switch (option) {
 
-            System.out.println("appointmentId");
-            System.out.println("patientId");
-            System.out.println("appointmentDate");
+                case 1 -> {
 
-        }
+                    ScheduleNewAppointment();
+                }
 
-        @Override
-        public void displaySummary() {
+                case 2 -> {
 
-            System.out.println("appointmentId,patientId,appointmentDate");
+                    ViewAllAppointments();
+                }
 
+                case 3 -> {
+                    ViewAppointmentsbyPatient();
+                }
+
+                case 4 -> {
+                    ViewAppointmentsbyDoctor();
+                }
+
+                case 5 -> {
+                    ViewAppointmentsbyDate();                    }
+
+                case 6 -> {
+
+                    RescheduleAppointment();
+
+                    String key = InputHandler.getStringInput("Search keyword: ");
+                    search(key);
+                }
+
+                case 7 -> {
+                     CancelAppointment();
+                }
+
+                case 8->{
+
+                    CompleteAppointment();
+                }
+
+                case 9->{
+
+                    ViewUpcomingAppointments();
+                }
+
+                case 10 -> {
+
+                    String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                    remove(patientId);
+                }
+
+                case 12 -> {
+
+                    String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                    displayPatientHistory(patientId);
+                }
+
+                case 0 -> {
+                    patientExit = false;
+                }
+            }
         }
     }
 }
+
+
 
 

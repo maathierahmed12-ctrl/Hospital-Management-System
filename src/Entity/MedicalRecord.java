@@ -1,8 +1,10 @@
 package Entity;
 
+import Interface.Displayable;
+
 import java.time.LocalDate;
 
-public class MedicalRecord {
+public class MedicalRecord implements Displayable {
 
     private String recordId;
     private String patientId;
@@ -103,6 +105,37 @@ public class MedicalRecord {
         System.out.println("prescription" + prescription);
         System.out.println("testResults" + testResults);
         System.out.println("notes" + notes);
+
+    }
+
+    @Override
+    public void displaySummary() {
+
+    }
+
+    public class Medical {
+
+        private String recordId;
+        private String patientId;
+        private String doctorId;
+        private LocalDate visitDate;
+        private String diagnosis;
+        private String prescription;
+        private String testResults;
+        private String notes;
+
+        public Medical(String recordId, String patientId, String doctorId, String diagnosis, String prescription, String testResults, String notes) {
+
+            this.recordId = recordId;
+            this.patientId = patientId;
+            this.doctorId = doctorId;
+            this.visitDate = visitDate;
+            this.diagnosis = diagnosis;
+            this.prescription = prescription;
+            this.testResults = testResults;
+            this.notes = notes;
+
+        }
 
     }
 

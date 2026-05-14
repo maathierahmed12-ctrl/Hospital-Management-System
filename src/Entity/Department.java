@@ -1,8 +1,10 @@
 package Entity;
+import Interface.Displayable;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.*;
-public class Department {
+public class Department implements Displayable {
 
     private String departmentId;
     private String departmentName;
@@ -106,6 +108,56 @@ public class Department {
     public void updateBedAvailability(int availableBeds) {
 
         this.availableBeds = this.availableBeds - availableBeds;
+    }
+
+    public void displayInfo() {
+    }
+
+    @Override
+    public void displaySummary() {
+
+    }
+
+    public class department implements Displayable{
+
+        private String departmentId;
+        private String departmentName;
+        private String headDoctorId;
+        private List<String> doctors;
+        private List<String> nurses;
+        private int bedCapacity;
+        private int availableBeds;
+
+
+        public department(String departmentId, String departmentName, String headDoctorId, List<String> doctors, List<String> nurses, int bedCapacity, int availableBeds) {
+
+            this.departmentId = departmentId;
+            this.departmentName = departmentName;
+            this.headDoctorId = headDoctorId;
+            this.doctors = doctors;
+            this.nurses = nurses;
+            this.bedCapacity = bedCapacity;
+            this.availableBeds = availableBeds;
+        }
+
+        @Override
+        public void displayInfo() {
+
+            System.out.println("departmentId");
+            System.out.println("departmentName");
+            System.out.println("headDoctorId");
+            System.out.println("doctors");
+            System.out.println("nurses");
+            System.out.println("bedCapacity");
+            System.out.println("availableBeds");
+        }
+
+        @Override
+        public void displaySummary() {
+
+            System.out.println("ID,Name,DoctorId,doctors,nurses,bedCapacity,availableBeds");
+
+        }
     }
 }
 

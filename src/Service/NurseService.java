@@ -1,6 +1,8 @@
 package Service;
 
 import Entity.Nurse;
+import Interface.Manageable;
+import Utils.InputHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -169,4 +171,124 @@ public class NurseService {
 
         return shiftNurses;
     }
+
+    public class nurse implements Manageable {
+
+
+        @Override
+        public void add(Object entity) {
+
+            System.out.println("added updated first name:");
+
+            System.out.println("added updated last name:");
+
+            System.out.println("added updated phone:");
+
+            System.out.println("added updated email:");
+
+            System.out.println("added updated qualification:");
+
+            System.out.println("added updated experience years:");
+
+            System.out.println("added updated department ID:");
+
+            System.out.println("added updated shift:");
+
+            System.out.println("added updated successfully");
+
+        }
+
+        @Override
+        public void remove(String id) {
+
+            System.out.println("remove  first name:");
+
+            System.out.println("remove  last name:");
+
+            System.out.println("remove phone:");
+
+            System.out.println("remove  email:");
+
+            System.out.println("remove  qualification:");
+
+            System.out.println("remove  experience years:");
+
+            System.out.println("remove department ID:");
+
+            System.out.println("remove  shift:");
+
+            System.out.println("remove  successfully");
+
+        }
+
+        @Override
+        public void getAll() {
+
+
+        }
+
+        public void handleNurseMenu() {
+
+            Boolean patientExit = true;
+
+            while (patientExit) {
+
+                System.out.println(MenuMessage.PatientManagementMenu);
+
+                int option = InputHandler.getIntInput(Constants.ENTER_OPTION, 0, 9);
+
+                switch (option) {
+
+                    case 1 -> {
+                        AddNurseAddNurse();
+                    }
+
+                    case 2 -> {
+
+                        ViewAllNurses();
+                    }
+
+                    case 3 -> {
+                        ViewNursesbyDepartment();
+                    }
+
+                    case 4 -> {
+                        ViewNursesbyShift();
+                    }
+
+                    case 5 -> {
+                        AssignNursetoPatien();                    }
+
+                    case 6 -> {
+
+                        UpdateNurseInformation();
+
+                        String key = InputHandler.getStringInput("Search keyword: ");
+                        search(key);
+                    }
+
+                    case 7 -> {
+                        RemoveNurse();
+                    }
+
+                    case 8 -> {
+
+                        String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                        remove(patientId);
+                    }
+
+                    case 9 -> {
+
+                        String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                        displayPatientHistory(patientId);
+                    }
+
+                    case 0 -> {
+                        patientExit = false;
+                    }
+                }
+            }
+        }
+    }
+
 }

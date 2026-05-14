@@ -1,9 +1,11 @@
 package Entity;
 
+import Interface.Displayable;
+
 import java.time.LocalDate;
 import java.util.*;
 
-public class Nurse extends Person {
+public class Nurse extends Person implements Displayable {
 
     private String nurseId;
     private String departmentId;
@@ -11,27 +13,30 @@ public class Nurse extends Person {
     private String qualification;
     private List<String> assignedPatients;
 
+    public Nurse(String id, String firstname, String lastname, String gender, String phoneNumber, LocalDate dob, String email, String address, int experienceYears, String nurseId, String departmentId) {
 
-    public Nurse(String id, String firstname, String lastname, String gender, String phoneNumber, LocalDate dob, String email, String address, int experienceYears, String departmentId, String shift) {
-        super(id, firstname, lastname, dateofBrith, gender, phoneNumber, email, address, String nurseId, String departmentId, String shift, String qualification, List < String > assignedPatients);
+        super();
 
         this.nurseId = nurseId;
-        this.departmentId = this.departmentId;
-        this.shift = this.shift;
+        this.departmentId = departmentId;
+        this.shift = shift;
         this.qualification = qualification;
-        this.assignedPatients = assignedPatients;
 
+        this.assignedPatients = new ArrayList<>();
     }
 
     public String getnurseId() {
+
         return nurseId;
     }
 
     public void setnurseId(String nurseId) {
+
         this.nurseId = nurseId;
     }
 
     public String getdepartmentId() {
+
         return departmentId;
     }
 
@@ -45,7 +50,7 @@ public class Nurse extends Person {
         return shift;
     }
 
-    public void setShift(String MorningEveningNigh) {
+    public void setShift(String shift) {
 
         this.shift = shift;
     }
@@ -53,6 +58,11 @@ public class Nurse extends Person {
     public String getQualification() {
 
         return qualification;
+    }
+
+    public void setQualification(String qualification) {
+
+        this.qualification = qualification;
     }
 
     public List<String> getassignedPatients() {
@@ -63,31 +73,36 @@ public class Nurse extends Person {
     public List<String> setassignedPatients(List<String> assignedPatients) {
 
         this.assignedPatients = assignedPatients;
+
+        return assignedPatients;
     }
 
     @Override
+    public void displayInfo() {
 
-    public void displayInfo(){
+        super.displayInfo();
 
-        super.displayIfo();
-
-        System.out.println("nurseId" + nurseId);
-        System.out.println("departmentId" + departmentId);
-        System.out.println("shift" + shift);
-        System.out.println("qualification" + qualification);
-        System.out.println("assignedPatients" + assignedPatients);
-
+        System.out.println("nurseId : " + nurseId);
+        System.out.println("departmentId : " + departmentId);
+        System.out.println("shift : " + shift);
+        System.out.println("qualification : " + qualification);
+        System.out.println("assignedPatients : " + assignedPatients);
     }
 
-    public void addpatientassignment( String patientassignmen){
+    @Override
+    public void displaySummary() {
 
-        if (assignedPatients == null){
+        System.out.println(nurseId + " " + departmentId + " " + shift);
+    }
+
+    public void addpatientassignment(String patientassignment) {
+
+        if (assignedPatients == null) {
 
             assignedPatients = new ArrayList<>();
-
         }
-        assignedPatients.add(patientassignmen);
-    }
 
+        assignedPatients.add(patientassignment);
+    }
 }
 

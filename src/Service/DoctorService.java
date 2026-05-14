@@ -1,14 +1,16 @@
 package Service;
 
 import Entity.Doctor;
-import Entity.Patient;
+import Interface.Manageable;
+import Utils.InputHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DoctorService {
+public class DoctorService  implements Manageable {
+
     Scanner scanner = new Scanner(System.in);
 
     static List<Doctor> doctors = new ArrayList<>();
@@ -16,7 +18,7 @@ public class DoctorService {
     private List<String> assignedPatients;
 
 
-    public Doctor addDoctor(){
+    public Doctor addDoctor() {
 
         System.out.println("Enter Doctor id :");
         String id = scanner.nextLine();
@@ -61,11 +63,11 @@ public class DoctorService {
         System.out.println("Enter Doctor consultationFee :");
         double consultationFee = scanner.nextDouble();
 
-        Doctor doctor = new Doctor(id,doctorFName,DOB,doctorLName,gender,phone,email,address,doctorId,specialization,qualification,experienceYears,departmentId,consultationFee,availableSlots,assignedPatients);
+        Doctor doctor = new Doctor(id, doctorFName, doctorLName);
         return doctor;
     }
 
-    public List<Doctor> addDoctors(){
+    public List<Doctor> addDoctors() {
 
         Boolean continueFlag = true;
         while (continueFlag) {
@@ -82,11 +84,11 @@ public class DoctorService {
 
     }
 
-    public void editDoctor(String doctorId){
+    public void editDoctor(String doctorId) {
 
-        for(Doctor doctor : doctors){
+        for (Doctor doctor : doctors) {
 
-            if(doctor.getDoctorId().equals(doctorId)){
+            if (doctor.getDoctorId().equals(doctorId)) {
                 System.out.println("Enter updated Doctor id :");
                 doctor.setId(scanner.nextLine());
 
@@ -141,21 +143,21 @@ public class DoctorService {
 
     }
 
-    public void removeDoctor(String doctorId){
+    public void removeDoctor(String doctorId) {
 
-
-        doctors.removeIf(Doctor);
-
+        for (Doctor d :doctors) {
+            doctors.remove(d);
+        }
         System.out.println("patient removed successfully");
 
         System.out.println("patient not found");
 
     }
 
-    public Doctor getDoctorById(String doctorId){
+    public Doctor getDoctorById(String doctorId) {
 
-        for(Doctor doctor: doctors){
-            if(doctor.getDoctorId().equals(doctorId)){
+        for (Doctor doctor : doctors) {
+            if (doctor.getDoctorId().equals(doctorId)) {
                 return doctor;
             }
 
@@ -165,9 +167,9 @@ public class DoctorService {
     }
 
 
-    public void displayAllDoctors(){
+    public void displayAllDoctors() {
 
-        for(Doctor doctor: doctors){
+        for (Doctor doctor : doctors) {
             doctor.displayInfo();
         }
 
@@ -177,29 +179,257 @@ public class DoctorService {
 
         List<Doctor> specializationDoctors = new ArrayList<>();
 
-        for(Doctor doctor : doctors){
+        for (Doctor doctor : doctors) {
 
-            if(doctor.getSpecialization().equals(specialization)){
+            if (doctor.getSpecialization().equals(specialization)) {
                 specializationDoctors.add(doctor);
             }
         }
         return specializationDoctors;
     }
 
-    public List<Doctor> getAvailableDoctors(){
+    public List<Doctor> getAvailableDoctors() {
 
         List<Doctor> availableDoctors = new ArrayList<>();
 
-        for(Doctor doctor : doctors){
+        for (Doctor doctor : doctors) {
 
-            if (!doctor.getAvailableSlots().isEmpty()) {
+            if (doctor.getAvailableSlots() != null &&
+                    !doctor.getAvailableSlots().isEmpty()) {
+
                 availableDoctors.add(doctor);
             }
-
         }
 
         return availableDoctors;
     }
+    public void addDoctor(String name, String specialization, String phone) {
 
+        Doctor doctor = new Doctor(name, specialization, phone);
+
+        doctors.add(doctor);
+
+        System.out.println("Doctor added successfully");
+    }
+
+    public void assDoctor(String name, String specialization, String phone, double consultationFee) {
+
+        Doctor doctor = new Doctor(name, specialization, phone);
+
+        doctors.add(doctor);
+
+        System.out.println("Doctor added successfully");
+
+    }
+
+    public void addDoctor(Doctor doctor) {
+
+        doctors.add(doctor);
+        System.out.println("Doctor object added successfully");
+    }
+
+    public void assignPatient(String doctorId, String patientId) {
+
+        for (Doctor doctor : doctors) {
+
+            if (doctor.getDoctorId().equals(doctorId)) {
+
+                doctor.setaddress(patientId);
+
+                System.out.println("Doctor assigned successfully");
+            }
+        }
+    }
+
+    public void assignPatient(String doctorId, List<String> patientIds) {
+
+        for (Doctor doctor : doctors) {
+
+            if (doctorId.equals(doctor.getDoctorId())) {
+
+                for (String patientId : patientIds) {
+
+                    doctor.assignPatient(patientId);
+
+                    System.out.println("patients assigned successfully");
+
+                }
+            }
+
+        }
+    }
+
+    public void displayDoctors() {
+
+
+        for (Doctor doctor : doctors) {
+
+            doctor.displayInfo();
+        }
+    }
+
+    public void displayDoctors(String specialization) {
+
+        for (Doctor doctor : doctors) {
+
+            if (doctor.getSpecialization().equals(specialization)) {
+
+                doctor.displayInfo();
+            }
+        }
+
+    }
+
+    public void displayDoctors(String departmentId, boolean showAvailableOnly) {
+
+        for (Doctor doctor : doctors) {
+
+            if (doctor.getdepartmentId().equals(departmentId)) {
+
+                if (showAvailableOnly) {
+
+                    if (doctor.getAvailableSlots() != null &&
+                            !doctor.getAvailableSlots().isEmpty()) {
+
+                        doctor.displayInfo();
+                    }
+
+                } else {
+                    doctor.displayInfo();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void add(Object entity) {
+
+    }
+
+    @Override
+    public void remove(String id) {
+
+    }
+
+    @Override
+    public void getAll() {
+
+    }
+
+    public class doctor {
+
+
+        public void add(Object entity) {
+            System.out.println("added  Doctor id :");
+
+            System.out.println("added  Doctor first name :");
+
+            System.out.println("added  Doctor last name :");
+
+            System.out.println("added  Doctor DOB: ");
+
+
+            System.out.println("added  Doctor gender :");
+
+            System.out.println("added  Doctor phone number :");
+
+            System.out.println("added  Doctor email :");
+
+            System.out.println("added  Doctor address :");
+
+            System.out.println("added  Doctor ID :");
+
+            System.out.println("added  Doctor specialization :");
+
+            System.out.println("added  Doctor qualification :");
+
+            System.out.println("added  Doctor experienceYears :");
+
+
+            System.out.println("added  Doctor departmentId :");
+
+
+            System.out.println("added  Doctor consultationFee :");
+
+
+        }
+
+        public void handleDoctorMenu() {
+
+            Boolean patientExit = true;
+
+            while (patientExit) {
+
+                System.out.println(MenuMessage.PatientManagementMenu);
+
+                int option = InputHandler.getIntInput(Constants.ENTER_OPTION, 0, 9);
+
+                switch (option) {
+
+                    case 1 -> {
+                        AddDoctor();
+                    }
+
+                    case 2 -> {
+
+                        AddSurgeon();
+                    }
+
+                    case 3 -> {
+                        AddConsultant();
+                    }
+
+                    case 4 -> {
+                        AddGeneralPractitioner();
+                    }
+
+                    case 5 -> {
+                        SearchDoctorbySpecialization();                    }
+
+                    case 6 -> {
+
+                        ViewAvailableDoctors();
+
+                        String key = InputHandler.getStringInput("Search keyword: ");
+                        search(key);
+                    }
+
+                    case 7 -> {
+                        AssignPatienttoDoctor();
+                    }
+
+                    case 8-> {
+
+                        UpdateDoctorInformation();
+
+                    }
+
+                    case 9-> {
+                        RemoveDoctor();
+
+                    }
+
+                    case 10 -> {
+
+                        String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                        remove(patientId);
+                    }
+
+                    case 11 -> {
+
+                        String patientId = InputHandler.getStringInput("Enter patient Id: ");
+                        displayPatientHistory(patientId);
+                    }
+
+                    }
+            }
+        }
+    }
 
 }
+
+
+
+
+
+
